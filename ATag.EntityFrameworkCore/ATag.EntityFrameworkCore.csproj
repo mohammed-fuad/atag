@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<TargetFrameworks>netstandard1.4;netstandard2.0</TargetFrameworks>
+    <Authors>UNOPS</Authors>
+    <Company>UNOPS</Company>
+    <Description>EF Core target for ATag</Description>
+    <PackageProjectUrl>https://github.com/UNOPS/atag</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/UNOPS/atag</RepositoryUrl>
+    <PackageTags>tag label category</PackageTags>
+    <Copyright>Copyright 2017 (c) UNOPS. All rights reserved.</Copyright>
+		<DocumentationFile>bin\$(Configuration)\$(Platform)\ATag.EntityFrameworkCore.xml</DocumentationFile>
+		<RepositoryType>Github</RepositoryType>
+		<PackageLicenseUrl>https://github.com/UNOPS/atag/blob/develop/LICENSE</PackageLicenseUrl>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<PackageReleaseNotes>Added support for asynchronous functions and updates entity framework nuget packages for .netstandard 2.0</PackageReleaseNotes>
+		<PackageIconUrl>https://github.com/UNOPS/atag/blob/develop/atag.png</PackageIconUrl>
+		<Version>0.0.10-beta</Version>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.15" />
+  </ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.4'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.1" />
+
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ATag.Core\ATag.Core.csproj" />
+  </ItemGroup>
+
+</Project>
