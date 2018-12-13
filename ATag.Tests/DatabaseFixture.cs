@@ -16,7 +16,7 @@
 				.AddJsonFile("appsettings.json")
 				.Build();
 
-			this.options = new DbContextOptionsBuilder().UseSqlServer(config.GetConnectionString("tag")).Options;
+			this.options = new DbContextOptionsBuilder().UseInMemoryDatabase(config.GetConnectionString("tag")).Options;
 		}
 
 		public DataContext CreateDataContext()

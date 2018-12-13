@@ -1,6 +1,7 @@
 ﻿namespace ATag.EntityFrameworkCore
 {
     using System.Linq;
+    using System.Threading.Tasks;
     using ATag.Core;
     using LinqKit;
     using Microsoft.EntityFrameworkCore;
@@ -51,6 +52,32 @@
                 Results = query.Skip(excludedRows).Take(pageSize).ToArray(),
                 TotalCount = rowsCount
             };
+        }
+
+        public static async Task<PagedEntity<T>> WithPagingAsync<T>(this IQueryable<T> query, int pageIndex, int pageSize)
+        {
+            if (pageSize <= 0)
+            {
+                pageSize = 10;
+            }
+
+            //Total result count
+            var rowsCount = await query.CountAsync();
+
+            //If page number should be > 0 else set to first page
+            if (rowsCount <= pageSize || pageIndex <= 0)
+            {
+                pageIndex = 1;
+            }
+
+            //Calculate number of rows to skip on page size
+            var excludedRows = (pageIndex - 1) * pageSize;
+
+            return await Task.FromResult(new PagedEntity<T>
+            {
+                Results = await query.Skip(excludedRows).Take(pageSize).ToArrayAsync(),
+                TotalCount = rowsCount
+            });
         }
     }
 }
